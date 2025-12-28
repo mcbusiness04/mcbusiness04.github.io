@@ -1,10 +1,722 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>My Website</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <p>I made this online for free.</p>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Help & Legal</title>
+  <meta name="theme-color" content="#0b0f1a" />
+
+  <style>
+    :root{
+      --bg: #070a12;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --hair: rgba(255,255,255,.12);
+      --accent: #7c4dff;
+      --accent2: #00d1ff;
+      --ok: #25d366;
+
+      --radius: 18px;
+      --shadow: 0 18px 40px rgba(0,0,0,.45);
+      --blur: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(124,77,255,.35), transparent 55%),
+                  radial-gradient(900px 700px at 110% 10%, rgba(0,209,255,.25), transparent 45%),
+                  radial-gradient(900px 700px at 50% 120%, rgba(0,255,170,.12), transparent 55%),
+                  var(--bg);
+      overflow-x: hidden;
+    }
+
+    /* Soft floating blobs */
+    .blob {
+      position: fixed;
+      width: 320px; height: 320px;
+      filter: blur(34px);
+      opacity: .55;
+      z-index: -1;
+      animation: drift 16s ease-in-out infinite;
+      transform: translate3d(0,0,0);
+    }
+    .blob.a { left: -90px; top: 40px; background: rgba(124,77,255,.55); animation-delay: -3s; }
+    .blob.b { right: -120px; top: 210px; background: rgba(0,209,255,.45); animation-delay: -7s; }
+    .blob.c { left: 35%; bottom: -160px; background: rgba(0,255,170,.22); animation-delay: -11s; }
+
+    @keyframes drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(20px,-25px) scale(1.06); }
+    }
+
+    .wrap {
+      padding: 18px 16px 28px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border: 1px solid var(--hair);
+      transform: translateY(10px);
+      opacity: 0;
+      animation: popIn .9s cubic-bezier(.2,.9,.2,1) forwards;
+    }
+
+    @keyframes popIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .heroImg {
+      height: 220px;
+      background-image:
+        linear-gradient(180deg, rgba(7,10,18,.2) 0%, rgba(7,10,18,.65) 70%, rgba(7,10,18,1) 100%),
+        url("https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=1400&q=80");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.06);
+      animation: slowZoom 10s ease-in-out infinite alternate;
+      will-change: transform, background-position;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.06); background-position: 50% 45%; }
+      to   { transform: scale(1.12); background-position: 50% 55%; }
+    }
+
+    .heroTop {
+      position: absolute;
+      inset: 0;
+      padding: 18px 18px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .badgeRow {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      pointer-events: auto;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+      transform: translateY(6px);
+      opacity: 0;
+      animation: rise .75s ease forwards;
+    }
+    .chip:nth-child(2){ animation-delay: .08s; }
+    .chip:nth-child(3){ animation-delay: .16s; }
+
+    @keyframes rise {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .title {
+      font-size: 22px;
+      line-height: 1.1;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 56ch;
+    }
+
+    /* Sticky nav */
+    .nav {
+      position: sticky;
+      top: 10px;
+      z-index: 5;
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid var(--hair);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      box-shadow: 0 10px 26px rgba(0,0,0,.25);
+      transform: translateY(10px);
+      opacity: 0;
+      animation: fadeUp .8s ease .15s forwards;
+    }
+
+    .nav::-webkit-scrollbar { height: 0; }
+    .nav a {
+      scroll-snap-align: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: rgba(255,255,255,.92);
+      font-size: 12.5px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      white-space: nowrap;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .nav a:active { transform: scale(.98); }
+    .nav a:hover { border-color: rgba(255,255,255,.22); background: rgba(0,0,0,.24); }
+
+    /* Sections */
+    .section {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--hair);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .section.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .secHead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .secTitle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(12px 12px at 35% 30%, rgba(255,255,255,.35), transparent 60%),
+        linear-gradient(135deg, rgba(124,77,255,.75), rgba(0,209,255,.55));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 10px 18px rgba(0,0,0,.25);
+      flex: 0 0 auto;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.16);
+      white-space: nowrap;
+    }
+
+    .p {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,.82);
+      line-height: 1.55;
+      font-size: 13.5px;
+    }
+
+    .list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,.82);
+      line-height: 1.55;
+      font-size: 13.5px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.92);
+      font-size: 13px;
+      text-decoration: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      overflow: hidden;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .btn:hover { border-color: rgba(255,255,255,.22); background: rgba(0,0,0,.24); }
+    .btn:active { transform: scale(.98); }
+
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(124,77,255,.85), rgba(0,209,255,.65));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.whatsapp {
+      background: linear-gradient(135deg, rgba(37,211,102,.92), rgba(0,209,255,.45));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* Ripple effect */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      opacity: 0.65;
+      background: rgba(255,255,255,.55);
+      animation: ripple .55s ease-out;
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      to { transform: scale(14); opacity: 0; }
+    }
+
+    /* FAQ accordion */
+    .faq {
+      margin-top: 10px;
+      display: grid;
+      gap: 10px;
+    }
+    details {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      overflow: hidden;
+    }
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 12px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: rgba(255,255,255,.92);
+      font-size: 13.5px;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .chev {
+      width: 12px; height: 12px;
+      border-right: 2px solid rgba(255,255,255,.7);
+      border-bottom: 2px solid rgba(255,255,255,.7);
+      transform: rotate(45deg);
+      transition: transform .2s ease;
+      opacity: .9;
+      flex: 0 0 auto;
+    }
+    details[open] .chev { transform: rotate(225deg); }
+    .faqBody {
+      padding: 0 12px 12px;
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .footer {
+      margin: 18px 4px 0;
+      padding: 12px 12px 2px;
+      color: rgba(255,255,255,.6);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce){
+      * { animation: none !important; transition: none !important; }
+      .hero, .nav, .section { opacity: 1 !important; transform: none !important; }
+      .heroImg { transform: none !important; }
+    }
+
+    /* Small screens tweaks */
+    @media (max-width: 360px){
+      .actions { grid-template-columns: 1fr; }
+      .heroImg { height: 205px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+  <div class="blob c"></div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" aria-label="Header">
+      <div class="heroImg" id="heroImg"></div>
+      <div class="heroTop">
+        <div class="badgeRow">
+          <div class="chip">✨ Updated</div>
+          <div class="chip">🔒 Privacy-first</div>
+          <div class="chip">🛟 Support</div>
+        </div>
+        <h1 class="title">Help & Legal</h1>
+        <p class="subtitle">
+          Everything you need in one place: privacy policy, terms, support, and FAQs.
+        </p>
+      </div>
+    </section>
+
+    <!-- STICKY NAV -->
+    <nav class="nav" aria-label="Quick navigation">
+      <a href="#privacy">🔒 Privacy</a>
+      <a href="#terms">📄 Terms</a>
+      <a href="#support">💬 Support</a>
+      <a href="#faq">❓ FAQ</a>
+      <a href="#about">ℹ️ App Info</a>
+    </nav>
+
+    <!-- PRIVACY -->
+    <section class="section" id="privacy">
+      <div class="secHead">
+        <h2 class="secTitle">
+          <span class="icon">🔒</span>
+          Privacy Policy
+        </h2>
+        <span class="meta">Last updated: <span id="datePrivacy"></span></span>
+      </div>
+      <p class="p">
+        We respect your privacy. This section should explain what data you collect, why you collect it, how you store it,
+        and how users can control or delete it.
+      </p>
+      <ul class="list">
+        <li><b>Data collected:</b> (example) account email, app usage analytics, crash logs.</li>
+        <li><b>How it’s used:</b> to provide core features, improve stability, and offer support.</li>
+        <li><b>Sharing:</b> never sold; shared only with service providers as needed (e.g., analytics).</li>
+        <li><b>Your choices:</b> opt out of analytics, request export or deletion.</li>
+      </ul>
+      <div class="actions">
+        <a class="btn primary" href="#" onclick="copySection('privacy'); return false;">Copy Privacy Text</a>
+        <a class="btn" href="#" onclick="shareLink('#privacy'); return false;">Share Section</a>
+      </div>
+    </section>
+
+    <!-- TERMS -->
+    <section class="section" id="terms">
+      <div class="secHead">
+        <h2 class="secTitle">
+          <span class="icon">📄</span>
+          Terms & Conditions
+        </h2>
+        <span class="meta">Effective: <span id="dateTerms"></span></span>
+      </div>
+      <p class="p">
+        Terms describe acceptable use, limitations, subscriptions/refunds (if any), and legal disclaimers.
+        Replace this with your real terms or link to your hosted page.
+      </p>
+      <ul class="list">
+        <li><b>Eligibility:</b> users must meet your minimum age requirement.</li>
+        <li><b>Acceptable use:</b> no abuse, spam, reverse engineering, or illegal activity.</li>
+        <li><b>Service changes:</b> features may change to improve the product.</li>
+        <li><b>Liability:</b> the app is provided “as is” to the extent permitted by law.</li>
+      </ul>
+      <div class="actions">
+        <a class="btn primary" href="#" onclick="copySection('terms'); return false;">Copy Terms Text</a>
+        <a class="btn" href="#" onclick="shareLink('#terms'); return false;">Share Section</a>
+      </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section class="section" id="support">
+      <div class="secHead">
+        <h2 class="secTitle">
+          <span class="icon">💬</span>
+          Contact Support
+        </h2>
+        <span class="meta">Typical reply: 24–48h</span>
+      </div>
+      <p class="p">
+        Need help? Tap a button below. Update the email/links to your real support channels.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="mailto:support@yourapp.com?subject=Support%20Request&body=Hi%20Support%2C%0A%0AI%20need%20help%20with%3A%20"
+           >Email Support</a>
+        <a class="btn whatsapp" href="https://wa.me/15551234567" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" href="#" onclick="openSupportForm(); return false;">In-App Form</a>
+        <a class="btn" href="#" onclick="copyDeviceInfo(); return false;">Copy Device Info</a>
+      </div>
+
+      <div id="supportForm" style="display:none; margin-top:12px;">
+        <div style="border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.16); border-radius:14px; padding:12px;">
+          <div style="display:grid; gap:10px;">
+            <input id="sfEmail" type="email" placeholder="Your email"
+              style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text); outline:none;">
+            <input id="sfTopic" type="text" placeholder="Topic (e.g., Billing / Bug / Login)"
+              style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text); outline:none;">
+            <textarea id="sfMsg" rows="4" placeholder="Describe your issue…"
+              style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text); outline:none; resize:vertical;"></textarea>
+            <a class="btn primary" href="#" onclick="submitSupportForm(); return false;">Send</a>
+            <div id="sfNote" style="color:rgba(255,255,255,.7); font-size:12px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="secHead">
+        <h2 class="secTitle">
+          <span class="icon">❓</span>
+          FAQ
+        </h2>
+        <span class="meta">Quick answers</span>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>How do I delete my account? <span class="chev"></span></summary>
+          <div class="faqBody">
+            Add your exact steps here (e.g., Settings → Account → Delete). If you require email verification,
+            mention how long deletion takes.
+          </div>
+        </details>
+        <details>
+          <summary>How is my data stored? <span class="chev"></span></summary>
+          <div class="faqBody">
+            Explain whether data is encrypted, stored on-device or in the cloud, and what third-party services you use.
+          </div>
+        </details>
+        <details>
+          <summary>My app is crashing—what should I do? <span class="chev"></span></summary>
+          <div class="faqBody">
+            Suggest restarting, updating, reinstalling, and contacting support with device info and steps to reproduce.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="secHead">
+        <h2 class="secTitle">
+          <span class="icon">ℹ️</span>
+          App Info
+        </h2>
+        <span class="meta">Version: <span id="appVer">1.0.0</span></span>
+      </div>
+      <p class="p">
+        Add your company name, address (if applicable), and links to your website and socials.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="#" onclick="scrollToTop(); return false;">Back to Top</a>
+        <a class="btn" href="#" onclick="toggleTheme(); return false;">Toggle Theme</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> Your App Name · <span style="opacity:.85;">Made with ❤️ and fewer bugs</span>
+    </div>
+  </main>
+
+  <script>
+    // Dates (auto-fill)
+    const now = new Date();
+    const fmt = (d) => d.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    document.getElementById('datePrivacy').textContent = fmt(now);
+    document.getElementById('dateTerms').textContent = fmt(now);
+    document.getElementById('year').textContent = String(now.getFullYear());
+
+    // Intersection observer to animate sections in
+    const sections = document.querySelectorAll('.section');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.12 });
+    sections.forEach(s => io.observe(s));
+
+    // Subtle parallax effect on hero image
+    const hero = document.getElementById('heroImg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      hero.style.transform = `scale(1.08) translateY(${Math.min(y * 0.06, 18)}px)`;
+    }, { passive: true });
+
+    // Smooth anchor scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Ripple on buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const r = document.createElement('span');
+        r.className = 'ripple';
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        r.style.width = r.style.height = size + 'px';
+        r.style.left = (e.clientX - rect.left - size/2) + 'px';
+        r.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+        btn.appendChild(r);
+        setTimeout(() => r.remove(), 650);
+      });
+    });
+
+    // Helpers
+    function scrollToTop(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function shareLink(hash){
+      const url = location.origin + location.pathname + (hash || '');
+      if (navigator.share) {
+        navigator.share({ title: 'Help & Legal', url }).catch(()=>{});
+      } else {
+        navigator.clipboard?.writeText(url);
+        toast('Link copied!');
+      }
+    }
+
+    function copySection(sectionId){
+      const el = document.getElementById(sectionId);
+      if(!el) return;
+      const text = el.innerText.replace(/\n{3,}/g, "\n\n").trim();
+      navigator.clipboard?.writeText(text);
+      toast('Copied!');
+    }
+
+    function openSupportForm(){
+      const box = document.getElementById('supportForm');
+      const isOpen = box.style.display !== 'none';
+      box.style.display = isOpen ? 'none' : 'block';
+      if (!isOpen) {
+        box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => document.getElementById('sfEmail')?.focus(), 250);
+      }
+    }
+
+    function submitSupportForm(){
+      const email = document.getElementById('sfEmail').value.trim();
+      const topic = document.getElementById('sfTopic').value.trim();
+      const msg   = document.getElementById('sfMsg').value.trim();
+      const note  = document.getElementById('sfNote');
+
+      if(!email || !topic || !msg){
+        note.textContent = "Please fill out all fields.";
+        return;
+      }
+
+      // This demo just opens a mailto. Replace with your API call if needed.
+      const subject = encodeURIComponent("Support: " + topic);
+      const body = encodeURIComponent(
+        `Email: ${email}\nTopic: ${topic}\n\nMessage:\n${msg}\n\n---\nDevice Info:\n${getDeviceInfo()}`
+      );
+      window.location.href = `mailto:support@yourapp.com?subject=${subject}&body=${body}`;
+      note.textContent = "Opening your email app…";
+    }
+
+    function getDeviceInfo(){
+      return [
+        `User Agent: ${navigator.userAgent}`,
+        `Platform: ${navigator.platform}`,
+        `Language: ${navigator.language}`,
+        `Screen: ${window.screen.width}x${window.screen.height}`,
+        `Pixel Ratio: ${window.devicePixelRatio}`
+      ].join('\n');
+    }
+
+    function copyDeviceInfo(){
+      navigator.clipboard?.writeText(getDeviceInfo());
+      toast('Device info copied!');
+    }
+
+    // Simple toast
+    let toastEl;
+    function toast(message){
+      if(!toastEl){
+        toastEl = document.createElement('div');
+        toastEl.style.position = 'fixed';
+        toastEl.style.left = '50%';
+        toastEl.style.bottom = '18px';
+        toastEl.style.transform = 'translateX(-50%)';
+        toastEl.style.padding = '10px 12px';
+        toastEl.style.borderRadius = '999px';
+        toastEl.style.background = 'rgba(0,0,0,.55)';
+        toastEl.style.border = '1px solid rgba(255,255,255,.14)';
+        toastEl.style.backdropFilter = 'blur(14px)';
+        toastEl.style.webkitBackdropFilter = 'blur(14px)';
+        toastEl.style.color = 'rgba(255,255,255,.92)';
+        toastEl.style.fontSize = '12.5px';
+        toastEl.style.opacity = '0';
+        toastEl.style.transition = 'opacity .25s ease, transform .25s ease';
+        toastEl.style.zIndex = '9999';
+        document.body.appendChild(toastEl);
+      }
+      toastEl.textContent = message;
+      toastEl.style.opacity = '1';
+      toastEl.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(toastEl._t);
+      toastEl._t = setTimeout(() => {
+        toastEl.style.opacity = '0';
+        toastEl.style.transform = 'translateX(-50%) translateY(8px)';
+      }, 1200);
+    }
+
+    // Optional theme toggle (simple)
+    let dark = true;
+    function toggleTheme(){
+      dark = !dark;
+      document.documentElement.style.setProperty('--bg', dark ? '#070a12' : '#f6f7fb');
+      document.documentElement.style.setProperty('--text', dark ? 'rgba(255,255,255,.92)' : 'rgba(12,14,22,.92)');
+      document.documentElement.style.setProperty('--muted', dark ? 'rgba(255,255,255,.72)' : 'rgba(12,14,22,.64)');
+      toast(dark ? 'Dark mode' : 'Light mode');
+    }
+  </script>
+</body>
 </html>
