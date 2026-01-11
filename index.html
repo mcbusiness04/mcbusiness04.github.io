@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>1% Better – Privacy & Terms</title>
+  <title>1% Better with Units</title>
 
   <style>
     :root {
       --bg: #0b0d12;
-      --card: #151821;
+      --card: #161922;
       --text: #f2f3f5;
-      --muted: #b6bcc8;
+      --muted: #aab0bc;
       --accent: #4f8cff;
+      --border: rgba(255,255,255,0.08);
     }
 
     * {
@@ -27,60 +28,68 @@
       line-height: 1.6;
     }
 
-    .hero {
-      padding: 64px 20px 56px;
+    header {
+      padding: 56px 20px 40px;
       text-align: center;
       background:
-        radial-gradient(700px 300px at 50% -100px, rgba(79,140,255,.35), transparent 70%),
-        radial-gradient(500px 300px at 80% 0%, rgba(72,255,190,.25), transparent 60%);
+        radial-gradient(600px 240px at 50% -120px, rgba(79,140,255,.35), transparent 70%);
     }
 
-    .logo {
-      width: 68px;
-      height: 68px;
-      margin: 0 auto 20px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #4f8cff, #6ee7b7);
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: 26px;
-      color: #0b0d12;
-      box-shadow: 0 20px 50px rgba(0,0,0,.45);
-    }
-
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: 30px;
+    header h1 {
+      margin: 0;
+      font-size: 32px;
       letter-spacing: -0.02em;
     }
 
-    .hero p {
-      margin: 0;
+    header p {
+      margin-top: 10px;
       color: var(--muted);
       font-size: 15px;
-      max-width: 560px;
-      margin-inline: auto;
     }
 
-    .container {
+    main {
       max-width: 900px;
       margin: 0 auto;
       padding: 24px 16px 56px;
     }
 
-    .card {
+    details {
       background: var(--card);
       border-radius: 18px;
-      padding: 28px 22px;
-      margin-top: 28px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
       box-shadow: 0 20px 50px rgba(0,0,0,.45);
+      overflow: hidden;
     }
 
-    h2 {
-      margin-top: 0;
-      font-size: 22px;
-      letter-spacing: -0.01em;
+    summary {
+      cursor: pointer;
+      padding: 22px 20px;
+      font-size: 20px;
+      font-weight: 600;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "▾";
+      font-size: 20px;
+      color: var(--muted);
+      transition: transform 0.2s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .content {
+      padding: 0 20px 24px;
     }
 
     pre {
@@ -88,7 +97,8 @@
       font-family: inherit;
       font-size: 14px;
       color: #e6e8ec;
-      line-height: 1.6;
+      line-height: 1.65;
+      margin: 0;
     }
 
     .contact {
@@ -98,14 +108,14 @@
 
     .contact a {
       display: inline-block;
-      padding: 16px 28px;
+      padding: 16px 30px;
       border-radius: 16px;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
       font-weight: 600;
       font-size: 15px;
-      box-shadow: 0 12px 30px rgba(79,140,255,.45);
+      box-shadow: 0 14px 34px rgba(79,140,255,.45);
     }
 
     .contact a:active {
@@ -122,320 +132,227 @@
 </head>
 <body>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="logo">%</div>
-    <h1>1% Better – Habits Tracker</h1>
-    <p>Privacy Policy & Terms of Service</p>
-  </section>
+<header>
+  <h1>1% Better with Units</h1>
+  <p>Legal Information</p>
+</header>
 
-  <main class="container">
+<main>
 
-    <!-- PRIVACY POLICY -->
-    <section class="card">
-      <h2>Privacy Policy</h2>
+  <!-- TERMS OF SERVICE -->
+  <details>
+    <summary>Terms of Service</summary>
+    <div class="content">
       <pre>
-Privacy Policy
-Last Updated: 12/30/2025
-Introduction
-This Privacy Policy explains how 1% Better – Habits Tracker collects, uses, stores, and protects your information when you use our mobile application, 1% Better – Habits Tracker.
-We are committed to respecting your privacy and collecting only the information necessary to operate the App and provide its core habit and effort tracking features.
-By using the App, you acknowledge that your information will be handled as described in this Privacy Policy.
+Terms of Service for 1% Better
+Effective Date: 01/10/2026
 
-Information We Collect
-We collect only the information required to provide the App’s functionality.
-1. Account Information
-When you create an account, we collect:
-* Email address Used for account creation, authentication, and essential communication related to your account.
-* Password Processed securely by our authentication provider using industry-standard hashing methods. We do not store passwords in plain text and cannot view your password.
+1. Acceptance of Terms
+These Terms of Service govern your access to and use of the 1% Better mobile application. By downloading, accessing, or using the App, you agree to be bound by these Terms.
+If you do not agree to these Terms, do not use the App.
 
-2. Habit and Tracking Data
-When you use the App, we collect the data you voluntarily enter, including:
-* Habits Habit names, icons, colors, unit names, daily goals, and habit settings you configure.
-* Habit logs Daily progress counts and associated dates for each habit.
-* Bad habits Names of behaviors you choose to track.
-* Bad habit logs Dates and counts recorded for tracked bad habits.
-This data exists solely to allow you to track progress, view statistics, and maintain consistency across devices.
-
-3. Subscription Information
-If you purchase a subscription through the App Store, we store limited information necessary to manage access:
-* Product identifier
-* Apple-provided transaction identifiers
-* Purchase and expiration dates
-We do not collect or store your payment card details. All payment processing is handled directly by Apple.
-
-4. Local Device Storage
-Certain information is stored only on your device and is not transmitted to our servers, including:
-* Sound and haptic feedback preferences
-* Onboarding completion status
-* Cached subscription status for offline access
-This data can be removed by uninstalling the App.
-
-How We Use Your Information
-We use your information only to operate and improve the App’s core functionality, including to:
-* Provide habit tracking and progress visualization
-* Authenticate and manage user accounts
-* Sync data securely across devices or after reinstalling the App
-* Verify and manage subscription access
-* Maintain app stability and functionality
-We do not:
-* Use your data for advertising
-* Sell your data
-* Profile users
-* Use analytics or tracking services
-We may use or disclose information if required to comply with applicable laws, regulations, or valid legal requests.
-
-Data Storage and Security
-Where Your Data Is Stored
-* Cloud database Account data, habits, and logs are stored securely using Supabase infrastructure.
-* Your device App preferences and onboarding status are stored locally using secure device storage.
-
-Security Measures
-We protect your data using reasonable technical and organizational safeguards, including:
-* Encrypted connections
-* Secure authentication systems
-* Row-level security to ensure users can access only their own data
-* Industry-standard password hashing
-While we take strong precautions, no system is completely secure. You are responsible for maintaining the confidentiality of your login credentials.
-
-Third-Party Services
-We use the following third-party services solely to operate the App:
-Supabase
-* Purpose: User authentication and secure data storage
-* Data shared: Email address, encrypted authentication credentials, habit data, subscription status
-Apple App Store (StoreKit)
-* Purpose: Processing in-app purchases and subscriptions
-* Data shared: Transaction data handled directly by Apple
-We do not use advertising networks, analytics platforms, or third-party tracking tools.
-
-User Rights and Data Deletion
-Your Rights
-You have the right to:
-* Access your data at any time through the App
-* Edit or correct habits and logs
-* Delete your account and associated data
-
-How to Delete Your Data
-You may delete your account at any time:
-1. Open 1% Better – Habits Tracker
-2. Go to Settings
-3. Select Delete Account
-4. Confirm your choice
-Alternatively, you may email carlos@1betterwithunits.info with the subject “Account Deletion Request”, using the email associated with your account.
-
-What Happens When You Delete Your Account
-* Your account is immediately deactivated
-* All habit data, logs, and profile information are permanently deleted from our servers
-* Local app data is cleared
-* This action cannot be undone
-
-Children’s Privacy
-The App is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13.
-If you believe a child has created an account, please contact us and we will promptly delete the account and associated data.
-
-International Users
-1% Better – Habits Tracker is operated from Texas, United States. If you access the App from outside the U.S., your information may be transferred to and processed in the United States.
-
-European Economic Area (EEA)
-If you are located in the EEA:
-* Our legal basis for processing is contract performance and user consent
-* You have rights under GDPR, including access, correction, deletion, and data portability
-* Requests can be made via carlos@1betterwithunits.info
-
-California Residents
-Under the California Consumer Privacy Act (CCPA):
-* You have the right to know what personal data we collect
-* You may request deletion of your data
-* We do not sell personal information
-Requests may be submitted via email.
-
-Data Retention
-We retain data only as long as necessary:
-* Account and habit data: Stored while your account is active; deleted upon account deletion
-* Subscription records: Retained as required to manage access and resolve billing issues
-
-Changes to This Policy
-We may update this Privacy Policy from time to time. When changes occur:
-* The “Last Updated” date will be revised
-* Significant changes may be communicated via email or in-app notice
-Continued use of the App after changes indicates acceptance of the updated policy.
-
-Contact Us
-If you have questions about this Privacy Policy or your data, please contact:
-Email: carlos@1betterwithunits.info 
-1% Better – Habits Tracker 
-Texas, United States
-
-We aim to respond to inquiries within 30 days.
-
-Summary
-* We collect only what’s necessary to run the App
-* We do not sell data or use ads or analytics
-* Your data is securely stored and fully deletable
-* You remain in control of your information at all times
-      </pre>
-    </section>
-
-    <!-- TERMS OF SERVICE -->
-    <section class="card">
-      <h2>Terms of Service</h2>
-      <pre>
-Terms of Service
-Last Updated: 12/30/2025
-Agreement to Terms
-By downloading, accessing, or using 1% Better – Habits Tracker, you agree to be bound by these Terms of Service. If you do not agree to these Terms, do not use the App.
-These Terms constitute a legally binding agreement between you and 1% Better – Habits Tracker, operated from Texas, United States.
-
-Description of the Service
-1% Better – Habits Tracker is a productivity and habit-tracking mobile application designed to help users improve consistency and self-discipline over time. The App allows you to:
-* Create and manage habits with customizable goals
-* Log daily progress toward habits
-* Track behaviors you want to reduce
-* View statistics and progress trends over time
-* Sync your data across devices through your account
-The App is offered as a paid subscription service.
-
-Eligibility
+2. Eligibility
 You must be at least 13 years old to use the App.
-If you are between 13 and 18 years old, you represent that you have reviewed these Terms with a parent or legal guardian and that they have consented to your use of the App.
+If you are located in the European Union or European Economic Area, you must be at least 16 years old.
+By using the App, you represent that you meet the applicable age requirement.
 
-Account Registration
-To use the App, you must create an account using a valid email address and password.
-You are responsible for:
-* Providing accurate and current account information
-* Maintaining the confidentiality of your login credentials
-* All activity that occurs under your account
-You agree to notify us immediately if you believe your account has been compromised. To the fullest extent permitted by law, we are not responsible for losses resulting from unauthorized access caused by your failure to safeguard your credentials.
+3. Accounts
+An account is required to use the App.
+You agree to:
+* Provide accurate and current information
+* Maintain the confidentiality of your login credentials
+* Accept responsibility for all activity under your account
+We are not responsible for unauthorized access resulting from your failure to secure your account.
 
-Subscription and Payment
-Paid Subscription
-Access to the App requires an active subscription. Subscription options may include:
-* Monthly subscription
-* Annual subscription
+4. Subscriptions and Payments
+4.1 Subscription Plans
+The App offers the following subscription options:
+* $4.99 per month
+* $19.99 per year
+There is no free tier or trial.
 
-Payment Processing
-All payments are processed through Apple’s App Store. We do not collect or store payment card information.
-By subscribing, you agree to Apple’s applicable in-app purchase terms and conditions.
+4.2 Billing
+* Payments are processed exclusively through Apple via Apple StoreKit
+* We do not collect or store payment information
+* Subscription pricing and renewal terms are governed by Apple
 
-Automatic Renewal
-Subscriptions automatically renew at the end of each billing period unless canceled at least 24 hours before the renewal date.
+4.3 Cancellations and Refunds
+* Subscriptions may be canceled through your Apple ID settings
+* Refunds are handled solely by Apple in accordance with their policies
 
-Cancellation
-You may cancel your subscription at any time through your Apple ID account settings. Cancellation takes effect at the end of the current billing period.
+5. Acceptable Use
+You agree not to use the App to:
+* Violate any applicable laws or regulations
+* Attempt to reverse engineer, decompile, or exploit the App
+* Interfere with or disrupt the App’s infrastructure or security
+* Access data not intended for you
+We reserve the right to suspend or terminate accounts for violations of these rules.
 
-Refunds
-Refund requests must be submitted directly to Apple. We do not have the ability to issue refunds.
+6. User Content
+The App allows you to create and store personal habit data.
+* You retain full ownership of your User Content
+* You grant us a limited, non-exclusive, royalty-free license to store, process, and display your User Content solely to operate and provide the App
+We do not use your content for advertising or marketing purposes.
 
-Acceptable Use
-You agree to use the App only for lawful purposes and in accordance with these Terms.
-You may:
-* Use the App for personal productivity and habit tracking
-* Create habits and track your own progress
-* Access your account on multiple personal devices
+7. Intellectual Property
+All software, design, branding, and content associated with the App are owned by us or our licensors and are protected by intellectual property laws.
+You may not copy, modify, distribute, or create derivative works from the App without prior written permission.
 
-You may not:
-* Share your account credentials with others
-* Attempt to access another user’s account or data
-* Use the App for illegal, harmful, or abusive purposes
-* Reverse engineer, decompile, or attempt to extract the App’s source code
-* Circumvent subscription requirements or payment systems
-* Use bots, automation, or scraping tools to access the App
-* Interfere with the App’s security or infrastructure
+8. Termination
+We may suspend or terminate your account at any time if:
+* You violate these Terms
+* Your use poses a security risk
+* Required by law or Apple policies
+You may terminate your account at any time by deleting your account within the App.
 
-User Content
-Ownership
-You retain ownership of the habit names, descriptions, and other content you create within the App.
+9. Service Availability
+We do not guarantee that the App will be available at all times or without interruption. Features may change, be suspended, or discontinued at any time.
 
-License to Us
-By using the App, you grant us a limited, non-exclusive license to store, process, and display your User Content solely for the purpose of providing the App’s services to you.
+10. Disclaimers
+The App is provided “as is” and “as available”, without warranties of any kind, express or implied.
+We do not guarantee:
+* Specific results or outcomes
+* Continuous or error-free operation
+* Accuracy or completeness of data
+The App is intended for informational and personal tracking purposes only and should not be relied upon for medical, legal, or professional advice.
 
-Responsibility
-You are solely responsible for your User Content. We do not monitor, review, or endorse User Content and are not liable for content you create or store in the App.
+11. Limitation of Liability
+To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, consequential, or special damages arising from or related to your use of the App.
+Our total liability for any claim shall not exceed the amount you paid for the App in the twelve (12) months preceding the claim.
 
-Intellectual Property
-The App, including its software, design, features, graphics, text, and branding, is owned by 1% Better – Habits Tracker and is protected by intellectual property laws.
-You are granted a limited, non-exclusive, non-transferable, revocable license to use the App for personal, non-commercial purposes, subject to these Terms.
-You may not copy, modify, distribute, or create derivative works based on the App without our prior written consent.
-
-Not Medical or Mental Health Advice
-The App is a productivity and habit-tracking tool only.
-The App does not:
-* Provide medical, psychological, or mental health advice
-* Diagnose or treat medical or mental health conditions
-* Replace professional healthcare or therapy
-If you have concerns about your physical or mental health, consult a qualified professional. Do not rely on the App for medical or mental health decisions.
-
-Disclaimer of Warranties
-THE APP IS PROVIDED “AS IS” AND “AS AVAILABLE.”
-TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF:
-* MERCHANTABILITY
-* FITNESS FOR A PARTICULAR PURPOSE
-* NON-INFRINGEMENT
-* ACCURACY OR RELIABILITY OF DATA
-We do not guarantee that the App will be uninterrupted, error-free, or meet your specific expectations.
-
-Limitation of Liability
-TO THE MAXIMUM EXTENT PERMITTED BY LAW:
-IN NO EVENT SHALL 1% BETTER – HABITS TRACKER BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF DATA, PROFITS, OR GOODWILL, ARISING FROM YOUR USE OF OR INABILITY TO USE THE APP.
-OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID FOR THE APP IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.
-Some jurisdictions do not allow certain limitations. In such cases, liability is limited to the fullest extent permitted by law.
-
-Indemnification
-You agree to indemnify and hold harmless 1% Better – Habits Tracker from any claims, damages, losses, or expenses arising from:
+12. Indemnification
+You agree to indemnify and hold us harmless from any claims, damages, losses, or expenses arising from:
 * Your use of the App
 * Your violation of these Terms
-* Your violation of any third-party rights
+* Your violation of applicable laws
 
-Account Termination
-By You
-You may delete your account at any time through the App’s settings. Account deletion permanently removes your data.
+13. Governing Law
+These Terms are governed by and construed in accordance with the laws of the State of California, United States, without regard to conflict of law principles.
 
-By Us
-We may suspend or terminate your account at our discretion, including for:
-* Violation of these Terms
-* Fraudulent, abusive, or unlawful activity
-* Non-payment of subscription fees
-Upon termination, your right to use the App ends immediately.
+14. Dispute Resolution
+Any dispute arising from these Terms or your use of the App shall be resolved through binding arbitration, except where prohibited by law.
+You agree to waive any right to participate in class actions or class arbitrations.
 
-Service Modifications
-We reserve the right to modify, suspend, or discontinue any part of the App at any time, including features and pricing.
-We are not obligated to maintain any specific feature indefinitely.
+15. Changes to These Terms
+We may update these Terms from time to time. Continued use of the App after changes become effective constitutes acceptance of the updated Terms.
 
-Third-Party Services
-The App relies on third-party services (including Apple and backend infrastructure providers). We are not responsible for the availability or performance of third-party services.
-Your use of those services is governed by their respective terms.
-
-Governing Law and Jurisdiction
-These Terms are governed by the laws of the State of Texas, without regard to conflict of law principles.
-Any disputes shall be resolved exclusively in the state or federal courts located in Texas, United States.
-
-Dispute Resolution
-Before filing a legal claim, you agree to contact us at carlos@1betterwithunits.info and attempt to resolve the issue informally for at least 30 days.
-
-Severability
-If any provision of these Terms is found unenforceable, the remaining provisions remain in effect.
-
-Entire Agreement
-These Terms and our Privacy Policy constitute the entire agreement between you and 1% Better – Habits Tracker regarding use of the App.
-
-Changes to These Terms
-We may update these Terms from time to time. Continued use of the App after changes are posted constitutes acceptance of the updated Terms.
-
-Contact Us
-Email: carlos@1betterwithunits.info
-Location: Texas, United States
+16. Contact Information
+For questions or legal notices related to these Terms, contact us at:
+📧 support@1betterwithunits.info
       </pre>
-    </section>
-
-    <!-- CONTACT -->
-    <div class="contact">
-      <a href="mailto:carlos@1betterwithunits.info">Contact Support</a>
     </div>
+  </details>
 
-    <footer>
-      © 2025 1% Better – Habits Tracker · Texas, United States
-    </footer>
+  <!-- PRIVACY POLICY -->
+  <details>
+    <summary>Privacy Policy</summary>
+    <div class="content">
+      <pre>
+Privacy Policy for 1% Better
+Effective Date: 01/10/2026
 
-  </main>
+1. Introduction
+Welcome to 1% Better. This Privacy Policy explains how we collect, use, store, and protect your information when you use the 1% Better mobile application.
+By using the App, you agree to the collection and use of information in accordance with this Privacy Policy.
+
+2. Information We Collect
+2.1 Information You Provide
+We collect the following information when you use the App:
+
+Account Information
+* Email address
+* Password (securely hashed and managed by our authentication provider)
+
+Habit & App Data
+* Habit names and configurations (icons, colors, unit names, daily goals)
+* Daily habit logs and counts
+* Bad habit names and logs
+All habit data is private and visible only to you.
+
+2.2 Information We Do Not Collect
+We do not collect:
+* Analytics or tracking data
+* Advertising identifiers
+* Location data
+* Contacts, photos, camera, or calendar access
+* Cookies (native iOS app only)
+* Crash reports via third-party analytics tools
+
+3. How We Use Your Information
+We use your information solely to:
+* Create and manage your account
+* Authenticate users
+* Provide core habit-tracking functionality
+* Sync and store your habit data
+* Determine subscription access
+* Maintain security and prevent misuse
+We do not use your data for advertising or marketing.
+
+4. Legal Basis for Processing (EU/UK Users)
+If you are located in the European Union or United Kingdom, we process your personal data based on contract necessity, as the data is required to provide the App’s services.
+
+5. Subscriptions and Payments
+All payments are processed by Apple through Apple StoreKit.
+We do not collect, store, or have access to your payment card details.
+
+6. Data Sharing and Third Parties
+We do not sell, rent, or share your personal data for advertising or marketing purposes.
+We share limited data only with the following service providers, strictly as necessary to operate the App:
+* Supabase – authentication and secure database hosting
+* Apple – subscription and payment processing
+These providers process data under their own privacy and security obligations.
+
+7. Data Retention
+* Account and habit data are retained until you delete your account
+* When an account is deleted, all associated data is removed from our production systems
+* Limited backup retention may apply for security and disaster-recovery purposes
+
+8. Account Deletion
+You may delete your account at any time within the App:
+Settings → Cancel Membership
+Account deletion permanently removes your personal and habit data from our systems.
+
+9. Security
+We implement reasonable and industry-standard security measures, including:
+* HTTPS/TLS encryption for all data transmission
+* Secure authentication and password hashing
+* Database row-level security to isolate user data
+While no system can be guaranteed 100% secure, we take appropriate steps to protect your information.
+
+10. Children’s Privacy
+The App is not intended for children under 13 years of age (or under 16 in the EU/EEA).
+We do not knowingly collect personal information from children.
+
+11. Your Rights
+Depending on your location, you may have the right to:
+* Access your personal data
+* Request deletion of your data
+* Request a copy of your data
+Requests can be made through the support link provided in the App.
+
+12. International Users
+Your information may be processed and stored in the United States.
+By using the App, you consent to this transfer.
+
+13. Changes to This Privacy Policy
+We may update this Privacy Policy from time to time. Any changes will be reflected by updating the effective date above.
+
+14. Contact Us
+If you have questions or requests regarding this Privacy Policy, please contact us at:
+📧 support@1betterwithunits.info
+      </pre>
+    </div>
+  </details>
+
+  <!-- CONTACT -->
+  <div class="contact">
+    <a href="mailto:support@1betterwithunits.info">Contact Support</a>
+  </div>
+
+  <footer>
+    © 2026 1% Better with Units
+  </footer>
+
+</main>
 </body>
 </html>
